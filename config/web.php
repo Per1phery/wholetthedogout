@@ -6,7 +6,36 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru-RU',
+    'aliases' => [
+        '@uploads' => '@app/web/uploads',
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\AdminModule',
+        ],
+    ],
     'components' => [
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                'admin' => 'admin/main/index',
+                'admin/carousel' => 'carousel/index',
+                'admin/carousel/create' => 'carousel/create',
+                'admin/settings' => 'settings/index',
+                'admin/user-managment' => 'user-managment/index',
+                'admin/user-managment/create' => 'user-managment/create',
+            ]
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*'=> [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                ]
+            ]
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'AQQJ6p_Cs3b_QnyfLuIW-f04BBY19sSh',
@@ -15,8 +44,10 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\UserModel',
+//            'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            //'loginUrl' => ['site/sign-in'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -47,11 +78,13 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        'allowedIPs' => ['192.168.*.*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
+        'allowedIPs' => ['192.168.*.*'],
     ];
 }
 
