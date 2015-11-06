@@ -20,6 +20,14 @@ use yii\data\ActiveDataProvider;
  */
 class UserModel extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    const SCENARIO_PROFILE = 'profile';
+    const SCENARIO_CHANGE_PASSWORD = 'changePassword';
+    const SCENARIO_SIGNUP = 'signup';
+
+    public $password;
+    public $confirmPassword;
+    public $oldPassword;
+
     /**
      * @inheritdoc
      */
@@ -34,6 +42,41 @@ class UserModel extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
     public function rules()
     {
         return [
+            ['login', 'filter', 'filter' => 'trim'],
+            ['login', 'required'],
+            ['login', 'unique', 'message' => Yii::t('app', 'This login has already been taken')],
+            ['login', 'string', 'min' => 2, 'max' => 255],
+
+            ['email', 'filter', 'filter' => 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'unique', 'message' => Yii::t('app', 'This email address has already been taken')],
+
+            ['password', 'required'],
+            ['password', 'string', 'min' => 5],
+
+            ['confirmPassword', 'required'],
+            ['confirmPassword', 'string', 'min' => 5],
+            ['confirmPassword', 'compare', 'compareAttribute' => 'password'],
+
+            ['oldPassword', 'required'],
+            ['oldPassword', 'oldPasswordValidator'],
+        ];
+    }
+
+    public function oldPasswordValidator($attribute, $params)
+    {
+        if (!$this->validatePassword($this->$attribute))
+            $this->addError($attribute, 'Old password is incorrect');
+        return true;
+    }
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_PROFILE => ['login', 'email'],
+            self::SCENARIO_CHANGE_PASSWORD => ['oldPassword', 'password', 'confirmPassword'],
+            self::SCENARIO_SIGNUP => ['login', 'email', 'password', 'confirmPassword'],
         ];
     }
 
@@ -137,6 +180,21 @@ class UserModel extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
     public function generateAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert))
+            return false;
+
+        if ($this->validate() && !empty($this->password))
+            $this->setPassword($this->password);
+
+        if ($insert) {
+            $this->generateAuthKey();
+        }
+
+        return true;
     }
 
     public static function search()

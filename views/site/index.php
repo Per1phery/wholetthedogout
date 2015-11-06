@@ -48,5 +48,9 @@ $this->title = 'My Yii Application';
             </div>
         </div>
 
+        <?= $this->render('_feedbackForm', [
+            'feedback' => $feedback
+        ]); ?>
+        <?= $this->render('_fileDownload'); ?>
     </div>
 </div>

@@ -1,0 +1,1 @@
+<?= \yii\helpers\Html::a('Скачайте полное меню', ['/site/download-file']); ?>

@@ -20,12 +20,16 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'admin' => 'admin/main/index',
+                'admin' => 'feedback/index',
+                'admin/feedback' => 'feedback/index',
                 'admin/carousel' => 'carousel/index',
                 'admin/carousel/create' => 'carousel/create',
                 'admin/settings' => 'settings/index',
+                'admin/file' => 'file/index',
                 'admin/user-managment' => 'user-managment/index',
                 'admin/user-managment/create' => 'user-managment/create',
+                'admin/user-managment/profile' => 'user-managment/profile',
+                'admin/user-managment/change-password' => 'user-managment/change-password',
             ]
         ],
         'i18n' => [

@@ -24,10 +24,10 @@ class CarouselActiveRecord extends ActiveRecord
     {
         parent::init();
 
-        $pageSize = Settings::findOne(['type' => 'main', 'key' => 'page_size']);
+        $pageSize = Settings::findOne(['type' => Settings::TYPE_MAIN, 'key' => 'page_size']);
 
         if ($pageSize !== null)
-            self::$defaultPageSize = $pageSize->value;
+            self::$defaultPageSize = (int)$pageSize->value;
     }
 
     public function behaviors()

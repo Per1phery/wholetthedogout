@@ -15,6 +15,8 @@ use yii\data\ActiveDataProvider;
  */
 class Settings extends \yii\db\ActiveRecord
 {
+   const TYPE_MAIN = 'main';
+
     /**
      * @inheritdoc
      */
@@ -47,10 +49,10 @@ class Settings extends \yii\db\ActiveRecord
 
     public static function search()
     {
-        $pageSize = self::findOne(['type' => 'main', 'key' => 'page_size']);
+        $pageSize = self::findOne(['type' => self::TYPE_MAIN, 'key' => 'page_size']);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => self::find(),
+            'query' => self::find()->where(['type' => self::TYPE_MAIN]),
             'sort' => [
                 'defaultOrder' => [
                     'title' => SORT_ASC,

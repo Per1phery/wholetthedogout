@@ -2,6 +2,8 @@
 return [
     'status_on' => 'включён',
     'status_off' => 'выключен',
+    'status_confirmed' => 'подтверждён',
+    'status_unconfirmed' => 'не подтверждён',
     'Image' => 'Изображение',
     'Link' => 'Ссылка',
     'Status' => 'Статус',
@@ -13,6 +15,8 @@ return [
     'Password' => 'Пароль',
     'Title' => 'Название',
     'Value' => 'Значение',
+    'Phone' => 'Телефон',
+    'Created At' => 'Создан',
     'Modifications have been saved' => 'Изменения сохранены',
     'Modifications have not been saved' => 'Изменения не сохранены',
     'This email address has already been taken' => 'Email уже используется',
@@ -23,4 +27,9 @@ return [
     'Profile' => 'Команда',
     'Users Managment' => 'Пользователи',
     'Settings' => 'Настройки',
+    'Feedback' => 'Обратная связь',
+    'File' => 'Файл',
+    'Self Profile' => 'Профиль',
+    'Update profile' => 'Обновить профиль',
+    'Change password' => 'Сменить пароль',
 ];

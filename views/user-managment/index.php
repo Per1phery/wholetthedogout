@@ -5,8 +5,8 @@ echo \yii\grid\GridView::widget([
         'login',
         'email',
         [
-            'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}',
-        ],
+            'attribute' => 'created_at',
+            'format' => ['date', 'd/m/Y H:i:s']
+        ]
     ]
 ]);

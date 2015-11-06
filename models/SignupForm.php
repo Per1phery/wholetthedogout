@@ -12,7 +12,9 @@ class SignupForm extends Model
 {
     public $login;
     public $email;
+    public $oldPassword;
     public $password;
+    public $confirmPassword;
 
     /**
      * @inheritdoc
@@ -24,12 +26,18 @@ class SignupForm extends Model
             ['login', 'required'],
             ['login', 'unique', 'targetClass' => '\app\models\UserModel', 'message' => Yii::t('app', 'This login has already been taken')],
             ['login', 'string', 'min' => 2, 'max' => 255],
+
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => '\app\models\UserModel', 'message' => Yii::t('app', 'This email address has already been taken')],
+
             ['password', 'required'],
             ['password', 'string', 'min' => 5],
+
+            /*[['newPassword', 'confirmPassword'], 'required'],
+            [['newPassword', 'confirmPassword'], 'string', 'min' => 8],
+            [['confirmPassword'], 'compare', 'compareAttribute' => 'newPassword'],*/
         ];
     }
 

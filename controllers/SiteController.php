@@ -3,6 +3,9 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Feedback;
+use app\models\File;
+use app\models\Settings;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -51,7 +54,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $feedback = new Feedback();
+
+        return $this->render('index', [
+            'feedback' => $feedback
+        ]);
     }
 
     public function actionLogin()
@@ -101,5 +108,11 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionDownloadFile()
+    {
+        $file = Settings::findOne(['type' => File::TYPE_FILE, 'key' => File::FILE_KEY]);
+        return Yii::$app->response->sendFile(Yii::getAlias('@uploads/' . $file->value));
     }
 }
