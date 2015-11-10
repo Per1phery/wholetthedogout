@@ -4,6 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'name' => 'Startime',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
@@ -21,7 +22,11 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'admin' => 'feedback/index',
-                'admin/feedback' => 'feedback/index',
+                'admin/feedback/test/<a>/<b>' => 'feedback/index/test',
+                'admin/<controller>' => '<controller>/index',
+                'admin/<controller>/<id>' => '<controller>/<id>',
+
+                /*'admin/feedback' => 'feedback/index',
                 'admin/carousel' => 'carousel/index',
                 'admin/carousel/create' => 'carousel/create',
                 'admin/settings' => 'settings/index',
@@ -29,7 +34,7 @@ $config = [
                 'admin/user-managment' => 'user-managment/index',
                 'admin/user-managment/create' => 'user-managment/create',
                 'admin/user-managment/profile' => 'user-managment/profile',
-                'admin/user-managment/change-password' => 'user-managment/change-password',
+                'admin/user-managment/change-password' => 'user-managment/change-password',*/
             ]
         ],
         'i18n' => [

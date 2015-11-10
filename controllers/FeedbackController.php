@@ -34,7 +34,6 @@ class FeedbackController extends AdminController
     public function actionIndex()
     {
         $statuses = \app\models\Feedback::statuses();
-//        $dataProvider = Feedback::search();
         $searchModel = new FeedbackSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -73,5 +72,21 @@ class FeedbackController extends AdminController
             $this->setFlash('error', \Yii::t('app', 'Modifications have not been saved'));
 
         return $this->redirect(['/feedback/index']);
+    }
+
+    public function actionChangeStatus($status, $id)
+    {
+        $model = Feedback::findOne($id);
+        $model->status = $status;
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model->save()) {
+            return ['result' => 'success'];
+        }
+        return ['result' => 'error'];
+    }
+
+    public function actionTest($a,$b)
+    {
+
     }
 }

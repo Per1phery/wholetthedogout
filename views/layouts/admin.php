@@ -5,12 +5,12 @@ use yii\helpers\Html;
 /* @var $content string */
 
 
-if (Yii::$app->controller->action->id === 'login') { 
+/*if (Yii::$app->controller->action->id === 'login') {
 /**
  * Do not use this code in your template. Remove it. 
  * Instead, use the code  $this->layout = '//main-login'; in your controller.
  */
-    echo $this->render(
+    /*echo $this->render(
         'admin-login',
         ['content' => $content]
     );
@@ -20,11 +20,12 @@ if (Yii::$app->controller->action->id === 'login') {
         backend\assets\AppAsset::register($this);
     } else {
         app\assets\AppAsset::register($this);
-    }
+    }*/
 
     dmstr\web\AdminLteAsset::register($this);
+    app\assets\AppAsset::register($this);
 
-    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+    //$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
     ?>
     <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -41,19 +42,21 @@ if (Yii::$app->controller->action->id === 'login') {
     <div class="wrapper">
 
         <?= $this->render(
-            'header.php',
-            ['directoryAsset' => $directoryAsset]
+            'header.php'
+            //['directoryAsset' => $directoryAsset]
         ) ?>
 
         <?= $this->render(
-            'left.php',
-            ['directoryAsset' => $directoryAsset]
+            'left.php'
+            //['directoryAsset' => $directoryAsset]
         )
         ?>
 
         <?= $this->render(
             'content.php',
-            ['content' => $content, 'directoryAsset' => $directoryAsset]
+            ['content' => $content,
+                //'directoryAsset' => $directoryAsset
+            ]
         ) ?>
 
     </div>
@@ -62,4 +65,4 @@ if (Yii::$app->controller->action->id === 'login') {
     </body>
     </html>
     <?php $this->endPage() ?>
-<?php } ?>
+<?php //} ?>

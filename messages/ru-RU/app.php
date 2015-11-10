@@ -32,4 +32,7 @@ return [
     'Self Profile' => 'Профиль',
     'Update profile' => 'Обновить профиль',
     'Change password' => 'Сменить пароль',
+    'Sign out' => 'Выйти',
+    'To site' => 'К сайту',
+    'Menu' => 'Меню',
 ];

@@ -19,8 +19,11 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/bootstrap-switch.min.css'
     ];
     public $js = [
+        'js/backend/main.js',
+        'js/backend/bootstrap-switch.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
