@@ -30,11 +30,26 @@
                         ]
                     ],
                     ['label' => Yii::t('app', 'File'), 'icon' => 'glyphicon glyphicon-floppy-disk', 'url' => ['/file/index']],
+                    ['label' => Yii::t('app', 'Mention'), 'icon' => 'glyphicon glyphicon-sunglasses', 'url' => '',
+                        'items' => [
+                            ['label' => Yii::t('app', 'Parents'), 'icon' => 'fa fa-file-code-o', 'url' => '',
+                                'items' => [
+                                    ['label' => Yii::t('app', 'List'), 'icon' => 'glyphicon glyphicon-list', 'url' => ['/mention/index', 'type' => \app\models\Mention::TYPE_PARENT]],
+                                    ['label' => Yii::t('app', 'Create'), 'icon' => 'fa fa-file-code-o', 'url' => ['/mention/create', 'type' => \app\models\Mention::TYPE_PARENT]],
+                                ]
+                            ],
+                            ['label' => Yii::t('app', 'Children'), 'icon' => 'fa fa-file-code-o', 'url' => '',
+                                'items' => [
+                                    ['label' => Yii::t('app', 'List'), 'icon' => 'glyphicon glyphicon-list', 'url' => ['/mention/index', 'type' => \app\models\Mention::TYPE_CHILD]],
+                                    ['label' => Yii::t('app', 'Create'), 'icon' => 'fa fa-file-code-o', 'url' => ['/mention/create', 'type' => \app\models\Mention::TYPE_CHILD]],
+                                ]
+                            ],
+                        ]
+                    ],
                     ['label' => Yii::t('app', 'Users Managment'), 'icon' => 'glyphicon glyphicon-user', 'url' => '',
                         'items' => [
                             ['label' => Yii::t('app', 'List'), 'icon' => 'glyphicon glyphicon-list', 'url' => ['/user-managment/index']],
                             ['label' => Yii::t('app', 'Create'), 'icon' => 'fa fa-file-code-o', 'url' => ['/user-managment/create']],
-//                            ['label' => Yii::t('app', 'Self Profile'), 'icon' => 'fa fa-file-code-o', 'url' => ['/user-managment/profile']]
                         ]
                     ],
                     ['label' => Yii::t('app', 'Self Profile'), 'icon' => 'glyphicon glyphicon-sunglasses', 'url' => '',
@@ -44,40 +59,8 @@
                         ]
                     ],
                     ['label' => Yii::t('app', 'Settings'), 'icon' => 'glyphicon glyphicon-cog', 'url' => ['/settings/index']],
-                    /*
-                    ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    [
-                        'label' => 'Same tools',
-                        'icon' => 'fa fa-share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'fa fa-circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'fa fa-circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],*/
                 ],
             ]
         ) ?>
-
     </section>
-
 </aside>

@@ -2,32 +2,32 @@
 
 namespace app\models;
 
-use Yii;
 use app\components\CarouselActiveRecord;
+use Yii;
 use yii\data\ActiveDataProvider;
 
 /**
- * This is the model class for table "profile".
+ * This is the model class for table "mention".
  *
  * @property integer $id
  * @property string $image
- * @property string $full_name
- * @property string $description
  * @property integer $sort_order
  * @property integer $status
+ * @property integer $type
  */
-class Profile extends CarouselActiveRecord
+class Mention extends CarouselActiveRecord
 {
     const SCENARIO_INSERT = 'insert';
 
-    protected $folderName = 'team';
+    const TYPE_PARENT = 1;
+    const TYPE_CHILD = 2;
 
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'profile';
+        return 'mention';
     }
 
     /**
@@ -53,24 +53,26 @@ class Profile extends CarouselActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'image' => Yii::t('app', 'Image'),
-            'full_name' => Yii::t('app', 'Full Name'),
-            'description' => Yii::t('app', 'Description'),
             'sort_order' => Yii::t('app', 'Sort Order'),
             'status' => Yii::t('app', 'Status'),
+            'type' => Yii::t('app', 'Type'),
         ];
     }
 
-    public static function search()
+    public static function search($type)
     {
+        $pageSizeSetting = Settings::findOne(['type' => Settings::TYPE_MAIN, 'key' => 'page_size']);
+        $page = (!is_null($pageSizeSetting)) ? $pageSizeSetting->value : self::$defaultPageSize;
+
         $dataProvider = new ActiveDataProvider([
-            'query' => self::find(),
+            'query' => self::find()->where(['type' => (int)$type]),
             'sort' => [
                 'defaultOrder' => [
                     'sort_order' => SORT_ASC,
                 ]
             ],
             'pagination' => [
-                'pageSize' => self::$defaultPageSize
+                'pageSize' => $page
             ],
         ]);
 

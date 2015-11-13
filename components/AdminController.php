@@ -30,9 +30,9 @@ class AdminController extends Controller
         Yii::$app->session->setFlash($type, $message);
     }
 
-    protected function findModel($modelClass,$id)
+    protected function findModel($modelClass, $options)
     {
-        if (($model = $modelClass::findOne($id)) !== null) {
+        if (($model = $modelClass::findOne($options)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

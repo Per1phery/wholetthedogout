@@ -35,7 +35,7 @@ class CarouselController extends AdminController
 
     public function actionIndex()
     {
-        $statuses = \app\models\Carousel::statuses();
+        $statuses = Carousel::statuses();
         $dataProvider = Carousel::search();
 
         return $this->render('index', [

@@ -19,6 +19,8 @@ class Carousel extends CarouselActiveRecord
 {
     const SCENARIO_INSERT = 'insert';
 
+    protected $folderName = 'carousel';
+
     /**
      * @inheritdoc
      */
@@ -55,6 +57,9 @@ class Carousel extends CarouselActiveRecord
 
     public static function search()
     {
+        $pageSizeSetting = Settings::findOne(['type' => Settings::TYPE_MAIN, 'key' => 'page_size']);
+        $page = (!is_null($pageSizeSetting)) ? $pageSizeSetting->value : self::$defaultPageSize;
+
         $dataProvider = new ActiveDataProvider([
             'query' => self::find(),
             'sort' => [
@@ -63,7 +68,7 @@ class Carousel extends CarouselActiveRecord
                 ]
             ],
             'pagination' => [
-                'pageSize' => self::$defaultPageSize
+                'pageSize' => $page
             ],
         ]);
 

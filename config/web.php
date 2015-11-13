@@ -8,9 +8,6 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
-    'aliases' => [
-        '@uploads' => '@app/web/uploads',
-    ],
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\AdminModule',
@@ -22,7 +19,6 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'admin' => 'feedback/index',
-                'admin/feedback/test/<a>/<b>' => 'feedback/index/test',
                 'admin/<controller>' => '<controller>/index',
                 'admin/<controller>/<id>' => '<controller>/<id>',
 

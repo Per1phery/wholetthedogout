@@ -2,19 +2,19 @@
 namespace app\controllers;
 
 use app\components\AdminController;
-use app\models\Profile;
+use app\models\Mention;
 use himiklab\sortablegrid\SortableGridAction;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 
-class ProfileController extends AdminController
+class MentionController extends AdminController
 {
     public function actions()
     {
         return [
             'sort' => [
                 'class' => SortableGridAction::className(),
-                'modelName' => Profile::className(),
+                'modelName' => Mention::className(),
             ],
         ];
     }
@@ -33,10 +33,10 @@ class ProfileController extends AdminController
         );
     }
 
-    public function actionIndex()
+    public function actionIndex($type)
     {
-        $statuses = Profile::statuses();
-        $dataProvider = Profile::search();
+        $statuses = Mention::statuses();
+        $dataProvider = Mention::search($type);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -44,19 +44,11 @@ class ProfileController extends AdminController
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate($type)
     {
-        return $this->actionUpdate(true);
-    }
-
-    public function actionUpdate($new = false)
-    {
-        if ($new === true) {
-            $model = new Profile;
-            $model->scenario = Profile::SCENARIO_INSERT;
-        } else {
-            $model = $this->findModel(Profile::className(), \Yii::$app->request->get('id'));
-        }
+        $model = new Mention;
+        $model->scenario = Mention::SCENARIO_INSERT;
+        $model->type = $type;
 
         if ($model->load(\Yii::$app->request->post())) {
             if ($model->save()) {
@@ -64,7 +56,25 @@ class ProfileController extends AdminController
             } else {
                 $this->setFlash('error', \Yii::t('app', 'Image has not been saved'));
             }
-            return $this->redirect('/profile/index');
+
+            return $this->redirect(['index','type' => $model->type]);
+        }
+
+        return $this->render('form', ['model' => $model]);
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel(Mention::className(), $id);
+
+        if ($model->load(\Yii::$app->request->post())) {
+            if ($model->save()) {
+                $this->setFlash('success', \Yii::t('app', 'Image has been saved'));
+            } else {
+                $this->setFlash('error', \Yii::t('app', 'Image has not been saved'));
+            }
+
+            return $this->redirect(['index','type' => $model->type]);
         }
 
         return $this->render('form', ['model' => $model]);
@@ -72,11 +82,14 @@ class ProfileController extends AdminController
 
     public function actionDelete($id)
     {
-        if ($this->findModel(Profile::className(), $id)->delete() !== false)
+        $model = $this->findModel(Mention::className(), $id);
+        $type = $model->type;
+
+        if ($model->delete() !== false)
             $this->setFlash('success', \Yii::t('app', 'Modifications have been saved'));
         else
             $this->setFlash('error', \Yii::t('app', 'Modifications have not been saved'));
 
-        return $this->redirect(['/profile/index']);
+        return $this->redirect(['index','type' => $type]);
     }
 }

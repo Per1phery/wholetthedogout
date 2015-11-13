@@ -2,11 +2,18 @@
 echo \yii\grid\GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
-        'login',
-        'email',
+        [
+            'attribute' => 'login',
+            'contentOptions'=>['style'=>'width: 43%']
+        ],
+        [
+            'attribute' => 'email',
+            'contentOptions'=>['style'=>'width: 43%']
+        ],
         [
             'attribute' => 'created_at',
-            'format' => ['date', 'd/m/Y H:i:s']
+            'format' => ['date', 'd/m/Y H:i:s'],
+            'contentOptions'=>['style'=>'width: 14%']
         ]
     ]
 ]);

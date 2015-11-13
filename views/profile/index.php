@@ -6,7 +6,7 @@ echo \himiklab\sortablegrid\SortableGridView::widget([
             'attribute' => 'image',
             'format' => 'html',
             'value' => function($model) {
-                return \yii\helpers\Html::img(Yii::getAlias('@web') .'/uploads/'. $model->image, ['width'=>'140']);
+                return \yii\helpers\Html::img($model->getThumbImage(150, 100));
             }
         ],
         'full_name',

@@ -35,4 +35,7 @@ return [
     'Sign out' => 'Выйти',
     'To site' => 'К сайту',
     'Menu' => 'Меню',
+    'Mention' => 'Отзывы',
+    'Parents' => 'Родители',
+    'Children' => 'Дети',
 ];

@@ -11,7 +11,8 @@ echo \himiklab\sortablegrid\SortableGridView::widget([
                 return \yii\helpers\Html::img($model->getThumbImage(150, 100));
             }
         ],
-        'link',
+        'full_name',
+        'description',
         [
             'attribute' => 'status',
             'value' => function($model) use ($statuses) {
@@ -24,4 +25,3 @@ echo \himiklab\sortablegrid\SortableGridView::widget([
         ],
     ]
 ]);
-
